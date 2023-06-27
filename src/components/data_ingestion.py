@@ -3,9 +3,12 @@ import sys
 from src.exception import SensorException
 from src.logger import logging
 import pandas as pd
+import numpy as np
 
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+
+from src.components.data_transformation import DataTransformation, DataTransformationConfig
 
 #defining variables
 
@@ -24,6 +27,9 @@ class DataIngestion:
         try:
             df=pd.read_csv('aps_failure_training_set.csv')
             logging.info('Read the dataset as dataframe')
+
+            #replace na with Nan
+            df.replace(to_replace="na",value=np.NaN,inplace=True)
 
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path),exist_ok=True)
 
@@ -49,8 +55,8 @@ if __name__=="__main__":
     obj=DataIngestion()
     train_data,test_data=obj.initiate_data_ingestion()
 
-    # data_transformation=DataTransformation()
-    # train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
+    data_transformation=DataTransformation()
+    train_arr,test_arr,_ = data_transformation.initiate_data_transformation(train_data,test_data)
 
     # modeltrainer=ModelTrainer()
     # print(modeltrainer.initiate_model_trainer(train_arr,test_arr))
