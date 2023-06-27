@@ -7,7 +7,7 @@ import os
 # convert the datetime object into a string with required format.
 
 # log file name
-LOG_FILE_NAME = f"{datetime.now().strftime('%d_%m_%Y__%H:%M:%S')}.log"
+LOG_FILE_NAME = f"{datetime.now().strftime('%d_%m_%Y__%H_%M_%S')}.log"
 
 # log directory
 LOG_FILE_DIR = os.path.join(os.getcwd(), "logs")
@@ -22,4 +22,5 @@ logging.basicConfig(
     filename=LOG_FILE_PATH,
     format="[ %(asctime)s ] %(lineno)d %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO,
+    force = True
 )

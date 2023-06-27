@@ -3,7 +3,7 @@
 # exc_tb will have all the information like on which file the exception has occured, on which line etc.
 # the information will be provided by exc_info function
 import sys,os
-import logging
+from src.logger import logging
 
 def error_message_detail(error, error_detail: sys):
     _, _, exc_tb = error_detail.exc_info()
